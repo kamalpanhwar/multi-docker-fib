@@ -13,3 +13,10 @@ after_success:
   - docker build -t kamalpanhwar/mutli-nginx ./nginx
   - docker build -t kamalpanhwar/mutli-server ./server
   - docker build -t kamalpanhwar/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push kamalpanhwar/multi-client
+  - docker push kamalpanhwar/multi-nginx
+  - docker push kamalpanhwar/multi-server
+  -  docker push kamalpanhwar/mutl-worker
+
