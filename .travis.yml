@@ -6,7 +6,7 @@ before_install:
   - docker build -t kamalpanhwar/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kamalpanhwar/react-test npm test  -- --coverage
+  - docker run -e CI=true kamalpanhwar/react-test npm test  --detectOpenHandles
 
 after_success:
   - docker build -t kamalpanhwar/multi-client ./client
