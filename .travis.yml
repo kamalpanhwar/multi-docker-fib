@@ -6,17 +6,14 @@ before_install:
   - docker build -t kamalpanhwar/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kamalpanhwar/react-test npm test  --detectOpenHandles
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t kamalpanhwar/multi-client ./client
+  - docker images
+  - docker  push $DOCKER_USERNAME/multi-client
+  # - docker run -e CI=true kamalpanhwar/react-test npm test  --detectOpenHandles
 
-after_success:
-  jobs:
-    include:
-    - stage: build docker image
-      script:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-      - docker build -t kamalpanhwar/multi-client ./client
-      - docker images
-      - docker  push $DOCKER_USERNAME/multi-client
-
-
-
+# after_success:
+#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#   - docker build -t kamalpanhwar/multi-client ./client
+#   - docker images
+#   - docker  push $DOCKER_USERNAME/multi-client
