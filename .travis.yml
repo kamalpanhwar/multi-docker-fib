@@ -6,23 +6,23 @@ before_install:
   #  - docker build -t kamalpanhwar/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker build -t multi-server ./server
-  - docker tag multi-server:latest $DOCKER_ID/multi-server
-  - docker push $DOCKER_ID/multi-server 
-
-  - docker build -t multi-client ./client
-  - docker images
-  - docker tag multi-client:latest $DOCKER_ID/multi-client
-  - docker push $DOCKER_ID/multi-client
-
-  - docker build -t multi-worker:latest ./worker
-  - docker tag multi-worker:latest $DOCKER_ID/multi-worker
-  - docker push $DOCKER_ID/multi-worker
-
-  - docker build -t multi-nginx:latest ./nginx
-  - docker tag multi-nginx:latest $DOCKER_ID/multi-nginx
-  - docker push $DOCKER_ID/multi-nginx
+  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # - docker build -t multi-server ./server
+  # - docker tag multi-server:latest $DOCKER_ID/multi-server
+  # - docker push $DOCKER_ID/multi-server 
+  #
+  # - docker build -t multi-client ./client
+  # - docker images
+  # - docker tag multi-client:latest $DOCKER_ID/multi-client
+  # - docker push $DOCKER_ID/multi-client
+  #
+  # - docker build -t multi-worker:latest ./worker
+  # - docker tag multi-worker:latest $DOCKER_ID/multi-worker
+  # - docker push $DOCKER_ID/multi-worker
+  #
+  # - docker build -t multi-nginx:latest ./nginx
+  # - docker tag multi-nginx:latest $DOCKER_ID/multi-nginx
+  # - docker push $DOCKER_ID/multi-nginx
 
 deploy:
   provider: elasticbeanstalk
@@ -30,7 +30,7 @@ deploy:
   app: multi-docker-two
   env: Multi-docker-two-env
   bucket_name: "elasticbeanstalk-eu-west-2-693319392443"
-  bucket_path: "multi-docker-two"
+  bucket_path: "docker-travis-ci"
 
   on:
     branch: main
