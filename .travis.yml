@@ -17,7 +17,7 @@ script:
   - docker push $DOCKER_ID/multi-client
 
   - docker build -t multi-worker:latest ./worker
-  - docker tag mutli-worker:latest $DOCKER_ID/multi-worker
+  - docker tag multi-worker:latest $DOCKER_ID/multi-worker
   - docker push $DOCKER_ID/multi-worker
 
   - docker build -t multi-nginx:latest ./nginx
