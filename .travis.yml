@@ -8,18 +8,18 @@ before_install:
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker build -t multi-server ./server
-  - docker tag mutli-server:latest $DOCKER_ID/multi-server
+  - docker tag multi-server:latest $DOCKER_ID/multi-server
   - docker push $DOCKER_ID/multi-server 
+
   - docker build -t multi-client ./client
   - docker images
   - docker tag multi-client:latest $DOCKER_ID/multi-client
   - docker push $DOCKER_ID/multi-client
-  - docker build -t multi-server ./server
-  - docker tag mutli-server:latest $DOCKER_ID/multi-server
-  - docker push $DOCKER_ID/multi-server 
+
   - docker build -t multi-worker:latest ./worker
   - docker tag mutli-worker:latest $DOCKER_ID/multi-worker
   - docker push $DOCKER_ID/multi-worker
+
   - docker build -t multi-nginx:latest ./nginx
   - docker tag mutli-nginx:latest $DOCKER_ID/multi-nginx
   - docker push $DOCKER_ID/multi-nginx
