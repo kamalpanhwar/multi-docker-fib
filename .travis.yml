@@ -9,8 +9,14 @@ script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker build -t multi-client ./client
   - docker images
-  - docker tag multi-client $DOCKER_USERNAME/multi-client
+  - docker tag multi-client:latest $DOCKER_USERNAME/multi-client
   - docker push $DOCKER_USERNAME/multi-client
+  - docker build -t multi-server ./server
+  - docker tag mutli-server:latest $DOCKER_USERNAME/multi-server
+  - docker push $DOCKER_USERNAME/multi-server 
+  - docker build -t multi-worker:latest ./worker
+  - docker tag mutli-worker:latest $DOCKER_USERNAME/multi-worker
+  - docker push $DOCKER_USERNAME/multi-worker
   # - docker run -e CI=true kamalpanhwar/react-test npm test  --detectOpenHandles
 
 # after_success:
