@@ -7,9 +7,10 @@ before_install:
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker build -t kamalpanhwar/multi-client ./client
+  - docker build -t multi-client ./client
   - docker images
-  - docker  push kamalpanhwar/multi-client
+  - docker tag multi-client $DOCKER_USERNAME/multi-client
+  - docker push $DOCKER_USERNAME/multi-client
   # - docker run -e CI=true kamalpanhwar/react-test npm test  --detectOpenHandles
 
 # after_success:
